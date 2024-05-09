@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 import { takeLatest, put } from "redux-saga/effects";
+import axios from "axios";
 
 //Reducer to hold favorited GIPHYs
 const GIPHYs = (state = [], action) => {
@@ -35,9 +36,21 @@ function* searchGIFS(){
     //todo
 
 }
-function* fetchFavs(){
-    //todo
 
+//function to fetch favorited giphys to render to the favorite view 
+function* fetchFavs(){
+  try {
+    let response = yield axios({
+      method: 'GET',
+      url: '/api/favorites'
+    }) 
+    yield put({
+      type: 'SET_GIPHYs',
+      payload: response.data  
+    })
+  } catch(error){
+    console.log('Error in GET GIPHY favorites', error);
+  }
 }
 
 // this is the saga that will watch for actions
