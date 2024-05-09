@@ -1,5 +1,5 @@
 import TrendingTest from '../../trendingTest/TrendingTest.jsx'
-import SearchView from '../SearchView/SearchView.jsx';
+import SearchView from '../SearchView/SearchViewForm.jsx';
 
 function App() {
   return (
