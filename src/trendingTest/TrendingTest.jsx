@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import axios from "axios";
+
 function TrendingTest() {
   const dispatch = useDispatch();
   const giphys = useSelector((store) => store.GIPHYs);
@@ -10,7 +12,13 @@ function TrendingTest() {
   }, []);
 
   const getTrendingGIPHYs = () => {
-    dispatch({ type: "LOAD_TRENDING" });
+    axios({
+      method: "GET",
+      url: "/api/giphy",
+    }).then(dispatch({ type: "SET_GIPHYs" }))
+    .catch((error)=>{
+      console.log("error", error)
+    });
   };
   return (
     <>
