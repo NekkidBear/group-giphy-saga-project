@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export default function SearchViewForm() {
   const dispatch = useDispatch();
+
   const [searchTerms, setSearchTerms] = useState("");
   const searchGiphy = (e) => {
     e.preventDefault();

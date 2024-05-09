@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 import { takeLatest, put } from "redux-saga/effects";
+import axios from "axios";
 
 //Reducer to hold favorited GIPHYs
 const GIPHYs = (state = [], action) => {
@@ -31,10 +32,11 @@ function* setCategory(){
     //todo
 
 }
-function* searchGIFS(){
+function* searchGIFS(action){
   axios({
     method: "GET",
     url: "/api/giphy/search",
+    data: action.payload
   }).then(dispatch({ type: "SET_GIPHYs",}))
   .catch((error)=>{
     console.log("error", error)
