@@ -14,6 +14,8 @@ const GIPHYs = (state = [], action) => {
   }
 };
 
+
+
 function* onLoadGifs() {
   //This saga loads the trending GIFS on the initial page load
   try {
@@ -30,12 +32,29 @@ function* onLoadGifs() {
   }
 }
 
+function* addToFavs(){
+    //todo
+
+}
+function* setCategory(){
+    //todo
+
+}
+function* searchGIFS(){
+    //todo
+
+}
+function* fetchFavs(){
+    //todo
+
+}
+
 // this is the saga that will watch for actions
 function* rootSaga() {
-  yield takeLatest("ADD_TO_FAVORITES");
-  yield takeLatest("SET_CATEGORY");
-  yield takeLatest("FETCH_GIFS");
-  yield takeLatest("FETCH_FAVS");
+  yield takeLatest("ADD_TO_FAVORITES", addToFavs);
+  yield takeLatest("SET_CATEGORY", setCategory);
+  yield takeLatest("FETCH_GIFS", searchGIFS);
+  yield takeLatest("FETCH_FAVS", fetchFavs);
   yield takeLatest("LOAD_TRENDING", onLoadGifs);
 }
 
@@ -46,7 +65,9 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   // This function is our first reducer
   // reducer is a function that runs every time an action is dispatched
-  combineReducers({}),
+  combineReducers({
+    GIPHYs
+  }),
   applyMiddleware(sagaMiddleware, logger)
 );
 
