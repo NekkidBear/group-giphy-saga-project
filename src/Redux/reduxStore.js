@@ -43,8 +43,21 @@ function* searchGIFS(action) {
     console.log("error", error);
   }
 }
-function* fetchFavs() {
-  //todo
+
+//function to fetch favorited giphys to render to the favorite view 
+function* fetchFavs(){
+  try {
+    let response = yield axios({
+      method: 'GET',
+      url: '/api/favorites'
+    }) 
+    yield put({
+      type: 'SET_GIPHYs',
+      payload: response.data  
+    })
+  } catch(error){
+    console.log('Error in GET GIPHY favorites', error);
+  }
 }
 
 // this is the saga that will watch for actions
