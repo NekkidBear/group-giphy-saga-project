@@ -2,7 +2,6 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 import { takeLatest, put } from "redux-saga/effects";
-import axios from "axios";
 
 //Reducer to hold favorited GIPHYs
 const GIPHYs = (state = [], action) => {
@@ -14,6 +13,15 @@ const GIPHYs = (state = [], action) => {
   }
 };
 
+function* getTrendingGIPHYs(){
+    axios({
+      method: "GET",
+      url: "/api/giphy",
+    }).then(dispatch({ type: "SET_GIPHYs",}))
+    .catch((error)=>{
+      console.log("error", error)
+    });
+  };
 
 function* addToFavs(){
     //todo
@@ -38,13 +46,14 @@ function* rootSaga() {
   yield takeLatest("SET_CATEGORY", setCategory);
   yield takeLatest("FETCH_GIFS", searchGIFS);
   yield takeLatest("FETCH_FAVS", fetchFavs);
+  yield takeLatest("FETCH_TRENDING", getTrendingGIPHYs);
 }
 
 const sagaMiddleware = createSagaMiddleware();
 
 // This is creating the store
 // the store is the big JavaScript Object that holds all of the information for our application
-const store = createStore(
+const giphyStore = createStore(
   // This function is our first reducer
   // reducer is a function that runs every time an action is dispatched
   combineReducers({
@@ -55,4 +64,4 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
-export default store;
+export default giphyStore;

@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App/App.jsx";
 import { Provider } from "react-redux";
-import './Redux/reduxStore.js'
+import giphyStore from "./Redux/reduxStore.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <Provider store ="store">
+  <Provider store ={giphyStore}>
     <React.StrictMode>
       <App />
     </React.StrictMode>

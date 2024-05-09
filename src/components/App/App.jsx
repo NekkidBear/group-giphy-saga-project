@@ -1,4 +1,4 @@
-import '../../trendingTest/TrendingTest.jsx'
+import TrendingTest from '../../trendingTest/TrendingTest.jsx'
 
 function App() {
   return (

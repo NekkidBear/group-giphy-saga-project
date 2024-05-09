@@ -12,7 +12,7 @@
 
 ### Redux Store
 
-- [x] reducer to store favorites
+- [x] reducer to store favorites ✅ 2024-05-09
 
 ### Saga Functions
 

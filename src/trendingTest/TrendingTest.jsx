@@ -7,24 +7,23 @@ function TrendingTest() {
   const dispatch = useDispatch();
   const giphys = useSelector((store) => store.GIPHYs);
 
-  useEffect(() => {
-    getTrendingGIPHYs();
-  }, []);
-
   const getTrendingGIPHYs = () => {
-    axios({
-      method: "GET",
-      url: "/api/giphy",
-    }).then(dispatch({ type: "SET_GIPHYs" }))
-    .catch((error)=>{
-      console.log("error", error)
+    dispatch({
+      type: "FETCH_TRENDING",
     });
+
+    useEffect(() => {
+      getTrendingGIPHYs();
+    }, []);
+
+    return (
+      <>
+        {giphys.map((gif) => {
+          return <img key={gif.id} src={gif.images.original.url} />;
+        })}
+      </>
+    );
   };
-  return (
-    <>
-      {giphys.map((gif) => {
-        return <img key={gif.id} src={gif.images.original.url} />;
-      })}
-    </>
-  );
 }
+
+export default TrendingTest;
