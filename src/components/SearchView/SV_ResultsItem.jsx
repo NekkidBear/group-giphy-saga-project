@@ -1,9 +1,8 @@
-export default function SV_ResultsItem(gifs) {
+export default function SV_ResultsItem(gif) {
     const categories =[]; // will be populated by server query from categories table
   return (
     <>
       <div className="searchResultItem">
-        {gifs.map((gif) => {
           return (
             <div>
               <img key={gif.id} src={gif.images?.fixed_width.url} />
@@ -17,7 +16,6 @@ export default function SV_ResultsItem(gifs) {
               </select>
             </div>
           );
-        })}
       </div>
     </>
   );
