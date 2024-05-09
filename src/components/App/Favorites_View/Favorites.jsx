@@ -18,6 +18,8 @@ useEffect(() => {
     }
 
     return (
+        <div>
+        <h1>Giphy Favorites</h1>
         <ul>
             {favoriteGIPHYs.map((gif) => {
                 return(
@@ -25,7 +27,7 @@ useEffect(() => {
                 )
             })}            
         </ul>
-
+        </div>
     )
     //header
     //sub-component 
