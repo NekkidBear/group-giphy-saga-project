@@ -55,4 +55,4 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
-export default reduxStore;
+export default store;
