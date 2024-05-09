@@ -10,13 +10,19 @@ CREATE TABLE "categories" (
 INSERT INTO "categories"
   ("name")
   VALUES
-  ('wild'),
-  ('uproarious'),
-  ('poignant'),
-  ('felicitous'),
-  ('whimsical');
+  ('happy'),
+  ('sad'),
+  ('funny'),
+  ('animals'),
+  ('pop_culture'),
+  ('sports');
 
 -- Favorites table:
+CREATE TABLE "favorites" (
+  "id" SERIAL PRIMARY KEY,
+  "category_id" VARCHAR (100) NOT NULL,
+  "img_url" VARCHAR NOT NULL
+)
 
 -- You'll need a "favorites" table for storing each instance of
 -- a Giphy image that has been "favorited."
@@ -24,3 +30,8 @@ INSERT INTO "categories"
 -- categories via foreign key. This is a one-to-many relationship:
 --    One favorite has one category.
 --    One category can be had by many favorites.
+
+-- Query for favorites
+-- SELECT * FROM "favorites"
+--   JOIN "categories" ON favorites.category_id = categories.id
+--   WHERE category_id = $1
