@@ -30,7 +30,8 @@ router.get('/search', (req, res)=>{
         url: `https://api.giphy.com/v1/gifs/search?q="${req.body}&limit=5&rating=g&api_key=${GIPHY_API_KEY}`,
     })
     .then((response) =>{
-        const GIFsFromGiphy = response.data;
+        const GIFsFromGiphy = response.data.data;
+        console.log(GIFsFromGiphy)
         res.send(GIFsFromGiphy)
     })
     .catch((error) => {

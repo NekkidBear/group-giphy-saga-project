@@ -14,6 +14,8 @@ const GIPHYs = (state = [], action) => {
   }
 };
 
+//this function will be used to get trending GIFS 
+//that load initially before searching
 function* getTrendingGIPHYs() {
   axios({
     method: "GET",
@@ -31,6 +33,9 @@ function* addToFavs() {
 function* setCategory() {
   //todo
 }
+
+//this sends search terms to the API and then stores the result in the Redux State
+
 function* searchGIFS(action) {
   try {
     const response = yield axios({

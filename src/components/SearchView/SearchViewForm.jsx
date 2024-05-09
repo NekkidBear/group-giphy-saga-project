@@ -16,7 +16,7 @@ export default function SearchViewForm() {
   const inputHandler = (e) => {
     setSearchTerms(e.target.value);
   };
-
+  console.log("search terms", searchTerms)
   return (
     <div>
       <form onSubmit={searchGiphy} className="searchForm">
