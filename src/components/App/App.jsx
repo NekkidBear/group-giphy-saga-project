@@ -20,8 +20,6 @@ function App() {
         </nav>
         <Route exact path="/">
           <TrendingTest />
-        </Route>
-        <Route exact path="/search">
           <SearchView />
         </Route>
         <Route exact path="/favorites">
