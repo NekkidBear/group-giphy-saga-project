@@ -3,9 +3,6 @@ import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 import { takeLatest, put } from "redux-saga/effects";
 import axios from "axios";
-import 'dotenv/config';
-
-const {GIPHY_API_KEY} = process.env;
 
 //Reducer to hold favorited GIPHYs
 const GIPHYs = (state = [], action) => {
@@ -17,24 +14,6 @@ const GIPHYs = (state = [], action) => {
   }
 };
 
-
-
-
-function* onLoadGifs() {
-  //This saga loads the trending GIFS on the initial page load
-  try {
-    let response = yield axios({
-      method: "GET",
-      url: `https://api.giphy.com/v1/gifs/trending?api_key=${GIPHY_API_KEY}&&limit=5&&rating=g`,
-    });
-    yield put({
-      type: "SET_GIPHYs",
-      payload: response.data,
-    });
-  } catch (error) {
-    console.log("Unable to fetch trending GIFs.", error);
-  }
-}
 
 function* addToFavs(){
     //todo
@@ -59,7 +38,6 @@ function* rootSaga() {
   yield takeLatest("SET_CATEGORY", setCategory);
   yield takeLatest("FETCH_GIFS", searchGIFS);
   yield takeLatest("FETCH_FAVS", fetchFavs);
-  yield takeLatest("LOAD_TRENDING", onLoadGifs);
 }
 
 const sagaMiddleware = createSagaMiddleware();
