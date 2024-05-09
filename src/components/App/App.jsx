@@ -1,6 +1,7 @@
 import TrendingTest from "../../trendingTest/TrendingTest.jsx";
 import Favorites from "../App/Favorites_View/Favorites.jsx";
 import {HashRouter as Router,Route,Link} from "react-router-dom/cjs/react-router-dom.min.js";
+import SearchView from '../SearchView/SearchViewForm.jsx';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         </nav>
         <Route exact path="/">
           <TrendingTest />
+        </Route>
+        <Route exact path="/search">
+          <SearchView />
         </Route>
         <Route exact path="/favorites">
           <Favorites />

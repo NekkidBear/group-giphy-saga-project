@@ -14,27 +14,34 @@ const GIPHYs = (state = [], action) => {
   }
 };
 
-function* getTrendingGIPHYs(){
-    axios({
-      method: "GET",
-      url: "/api/giphy",
-    }).then(dispatch({ type: "SET_GIPHYs",}))
-    .catch((error)=>{
-      console.log("error", error)
+function* getTrendingGIPHYs() {
+  axios({
+    method: "GET",
+    url: "/api/giphy/trending",
+  })
+    .then(dispatch({ type: "SET_GIPHYs" }))
+    .catch((error) => {
+      console.log("error", error);
     });
-  };
-
-function* addToFavs(){
-    //todo
-
 }
-function* setCategory(){
-    //todo
 
+function* addToFavs() {
+  //todo
 }
-function* searchGIFS(){
-    //todo
-
+function* setCategory() {
+  //todo
+}
+function* searchGIFS(action) {
+  try {
+    const response = yield axios({
+      method: "GET",
+      url: "/api/giphy/search",
+      data: action.payload,
+    });
+    yield put({ type: "SET_GIPHYs", payload: response.data });
+  } catch (error) {
+    console.log("error", error);
+  }
 }
 
 //function to fetch favorited giphys to render to the favorite view 
@@ -70,7 +77,7 @@ const giphyStore = createStore(
   // This function is our first reducer
   // reducer is a function that runs every time an action is dispatched
   combineReducers({
-    GIPHYs
+    GIPHYs,
   }),
   applyMiddleware(sagaMiddleware, logger)
 );

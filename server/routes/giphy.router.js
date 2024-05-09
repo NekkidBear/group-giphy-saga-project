@@ -7,8 +7,8 @@ const GIPHY_API_KEY = process.env.GIPHY_API_KEY
 
 const router = express.Router();
 
-//GET /api/giphy
-router.get('/', (req, res)=>{
+//GET /api/giphy/trending
+router.get('/trending', (req, res)=>{
     axios({
         method: "GET",
         url: `https://api.giphy.com/v1/gifs/trending?api_key=${GIPHY_API_KEY}&&limit=5&&rating=g`
@@ -23,4 +23,20 @@ router.get('/', (req, res)=>{
     })
 })
 
-module.exports = router
+// get /api/giphy/search
+router.get('/search', (req, res)=>{
+    axios({
+        method: "GET",
+        url: `https://api.giphy.com/v1/gifs/search?q="${req.body}&limit=5&rating=g&api_key=${GIPHY_API_KEY}`,
+    })
+    .then((response) =>{
+        const GIFsFromGiphy = response.data;
+        res.send(GIFsFromGiphy)
+    })
+    .catch((error) => {
+        console.log('GET /api/giphy failed', error)
+        res.sendStatus(500);
+    })
+})
+
+module.exports = router;
