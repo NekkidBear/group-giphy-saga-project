@@ -14,37 +14,37 @@ const GIPHYs = (state = [], action) => {
   }
 };
 
-function* getTrendingGIPHYs(){
-    axios({
-      method: "GET",
-      url: "/api/giphy/trending",
-    }).then(dispatch({ type: "SET_GIPHYs",}))
-    .catch((error)=>{
-      console.log("error", error)
-    });
-  };
-
-function* addToFavs(){
-    //todo
-
-}
-function* setCategory(){
-    //todo
-
-}
-function* searchGIFS(action){
+function* getTrendingGIPHYs() {
   axios({
     method: "GET",
-    url: "/api/giphy/search",
-    data: action.payload
-  }).then(dispatch({ type: "SET_GIPHYs",}))
-  .catch((error)=>{
-    console.log("error", error)
-  });
-};
-function* fetchFavs(){
-    //todo
+    url: "/api/giphy/trending",
+  })
+    .then(dispatch({ type: "SET_GIPHYs" }))
+    .catch((error) => {
+      console.log("error", error);
+    });
+}
 
+function* addToFavs() {
+  //todo
+}
+function* setCategory() {
+  //todo
+}
+function* searchGIFS(action) {
+  try {
+    const response = yield axios({
+      method: "GET",
+      url: "/api/giphy/search",
+      data: action.payload,
+    });
+    yield put({ type: "SET_GIPHYs", payload: response.data });
+  } catch (error) {
+    console.log("error", error);
+  }
+}
+function* fetchFavs() {
+  //todo
 }
 
 // this is the saga that will watch for actions
@@ -64,7 +64,7 @@ const giphyStore = createStore(
   // This function is our first reducer
   // reducer is a function that runs every time an action is dispatched
   combineReducers({
-    GIPHYs
+    GIPHYs,
   }),
   applyMiddleware(sagaMiddleware, logger)
 );

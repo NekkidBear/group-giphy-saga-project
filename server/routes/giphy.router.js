@@ -39,3 +39,4 @@ router.get('/search', (req, res)=>{
     })
 })
 
+module.exports = router;
