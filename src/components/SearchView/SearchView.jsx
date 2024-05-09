@@ -5,14 +5,17 @@ export default function SearchView(){
     const dispatch = useDispatch();
     const [searchTerms, setSearchTerms] = useState('')
     const searchGiphy = () =>{
+        e.preventDefault();
         dispatch({
             type: "FETCH_GIFS",
             payload: searchTerms
         })
     }
-    const inputHandler=()=>{
-        //todo
+    const inputHandler=(e)=>{
+        e.preventDefault
+        setSearchTerms(e.target.value);
     }
+
     return(
         <div>
             <form onSubmit={searchGiphy} className="searchForm">
