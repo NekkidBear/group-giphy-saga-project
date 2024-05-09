@@ -1,9 +1,11 @@
 import SearchViewForm from "./SearchViewForm";
-import SearchViewResults from ''
+import SearchViewResults from "";
 
-export default function SearchView(){
-    return(
-        <SearchViewForm />
-        <SearchViewResults />
-    )
+export default function SearchView() {
+  return (
+    <>
+      <SearchViewForm />
+      <SearchViewResults />
+    </>
+  );
 }
