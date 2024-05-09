@@ -8,7 +8,7 @@ export default function SearchViewForm() {
     e.preventDefault();
     dispatch({
       type: "FETCH_GIFS",
-      payload: searchTerms,
+      payload: searchTerms.replace(' ', '+'),
     });
   };
 
