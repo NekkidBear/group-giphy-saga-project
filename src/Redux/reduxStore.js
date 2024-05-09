@@ -1,8 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
-import { takeLatest, put, take } from "redux-saga/effects";
+import { takeLatest, put } from "redux-saga/effects";
 import axios from "axios";
+import 'dotenv/config';
+
+const {GIPHY_API_KEY} = process.env;
 
 //Reducer to hold favorited GIPHYs
 const GIPHYs = (state = [], action) => {
@@ -13,6 +16,7 @@ const GIPHYs = (state = [], action) => {
       return state;
   }
 };
+
 
 
 
@@ -73,4 +77,4 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
-export default store;
+export default reduxStore;
