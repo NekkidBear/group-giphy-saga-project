@@ -16,7 +16,7 @@ const GIPHYs = (state = [], action) => {
 function* getTrendingGIPHYs(){
     axios({
       method: "GET",
-      url: "/api/giphy",
+      url: "/api/giphy/trending",
     }).then(dispatch({ type: "SET_GIPHYs",}))
     .catch((error)=>{
       console.log("error", error)
@@ -32,9 +32,14 @@ function* setCategory(){
 
 }
 function* searchGIFS(){
-    //todo
-
-}
+  axios({
+    method: "GET",
+    url: "/api/giphy/search",
+  }).then(dispatch({ type: "SET_GIPHYs",}))
+  .catch((error)=>{
+    console.log("error", error)
+  });
+};
 function* fetchFavs(){
     //todo
 
