@@ -5,11 +5,12 @@ export default function SearchViewForm() {
   const dispatch = useDispatch();
 
   const [searchTerms, setSearchTerms] = useState("");
+  console.log("search terms = ", searchTerms)
   const searchGiphy = (e) => {
     e.preventDefault();
     dispatch({
       type: "FETCH_GIFS",
-      payload: searchTerms.replace(' ', '+'),
+      payload: searchTerms,
     });
   };
 

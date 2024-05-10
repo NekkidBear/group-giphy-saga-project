@@ -39,10 +39,11 @@ function* setCategory() {
 
 function* searchGIFS(action) {
   try {
+    console.log("action.payload is", action.payload)
+    const searchTerms = action.payload
     const response = yield axios({
       method: "GET",
-      url: "/api/giphy/search",
-      data: action.payload,
+      url: `/api/giphy/search?q=${searchTerms}`,
     });
     yield put({ type: "SET_GIPHYs", payload: response.data });
   } catch (error) {
