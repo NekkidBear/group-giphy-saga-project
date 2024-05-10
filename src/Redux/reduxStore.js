@@ -15,16 +15,17 @@ const GIPHYs = (state = [], action) => {
 };
 
 //this function will be used to get trending GIFS 
-//that load initially before searching
-function* getTrendingGIPHYs() {
-  axios({
-    method: "GET",
-    url: "/api/giphy/trending",
-  })
-    .then(dispatch({ type: "SET_GIPHYs" }))
-    .catch((error) => {
-      console.log("error", error);
+//that load initially before searching (STRETCH GOAL)
+function* getTrendingGIPHYs(){
+  try {
+    const response = yield axios({
+      method: "GET",
+      url: "/api/giphy/trending",
     });
+    yield put({ type: "SET_GIPHYs", payload: response.data });
+  } catch (error) {
+    console.log("error", error);
+  }
 }
 
 function* addToFavs() {
