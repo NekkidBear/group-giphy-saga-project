@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
+
 export default function SV_ResultsItem(gif) {
   const categories = useSelector(store=>store.categories) // will be populated by server query from categories table
   // console.log('GIF is ', gif);
   let favStatus = false;
   let favoriteItem = {img_URL: "", category_id: ""}
-  let category = "";
+  let categorySelected = "";
 
   let img_URL = gif.images.fixed_width.url;
   const markFav = (e) => {
@@ -18,8 +19,8 @@ export default function SV_ResultsItem(gif) {
   };
 
   const setCategory = (e) => {
-    category = e.target.category_id
-    favoriteItem.category_id = category
+    categorySelected = e.target.category_id
+    favoriteItem.category_id = categorySelected
   };
 
   const createFavorite = () =>{
