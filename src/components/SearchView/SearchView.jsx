@@ -1,5 +1,5 @@
 import SearchViewForm from "./SearchViewForm.jsx";
-import SearchViewResults from "./SearchViewResults.jsx";
+import SearchViewResults from './SearchViewResults.jsx'
 
 export default function SearchView() {
   return (
