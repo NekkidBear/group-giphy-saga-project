@@ -4,7 +4,7 @@ export default function SV_ResultsItem(gif) {
   return (
       <div className="searchResultItem">
         <div>
-          <img key={gif.id} src={gif.images?.fixed_width.url} />
+          <img key={gif.id} src={gif.images?.fixed_width?.url} alt={gif?.alt_text || "GIF image based on search terms"}/>
           <button>Favorite this!</button>
           <select>
             {categories.map((category) => {

@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 
 export default function SearchViewResults() {
   const GIPHYs = useSelector(store=>store.GIPHYs);
+  console.log("in SearchViewResults")
   console.log('GIPHYs is', GIPHYs)
   return (
     <div>
       <h2>Search Results</h2>
       {GIPHYs.map((gif)=>{
+        console.log("GIF item is: ", gif)
         return (
             <div key={gif.id}>
                 <SV_ResultsItem {...gif} />
