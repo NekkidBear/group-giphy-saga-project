@@ -4,7 +4,7 @@ export default function SV_ResultsItem(gif) {
   // console.log('GIF is ', gif);
   let favStatus = false;
   let favoriteItem = {img_URL: "", category_id: ""}
-  const category = "";
+  let category = "";
 
   let img_URL = gif.images.fixed_width.url;
   const markFav = (e) => {

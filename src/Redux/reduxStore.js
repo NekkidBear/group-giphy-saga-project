@@ -37,6 +37,7 @@ function* fetchCategories(){
     console.log("error fetching categories", error)
   }}
 }
+
 //this function will be used to get trending GIFS 
 //that load initially before searching (STRETCH GOAL)
 function* getTrendingGIPHYs(){
