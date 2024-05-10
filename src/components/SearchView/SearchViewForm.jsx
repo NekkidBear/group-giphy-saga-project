@@ -20,7 +20,8 @@ export default function SearchViewForm() {
   return (
     <div>
       <form onSubmit={searchGiphy} className="searchForm">
-        <input onChange={inputHandler} type="text" placeholder="Search for " />
+      <label htmlFor="searchInput">Search Terms </label>
+        <input id="searchInput" onChange={inputHandler} type="text" placeholder="Search for " />
         <button type="submit">Show me the GIFS!</button>
       </form>
     </div>
