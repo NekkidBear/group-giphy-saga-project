@@ -25,9 +25,10 @@ router.get('/trending', (req, res)=>{
 
 // get /api/giphy/search
 router.get('/search', (req, res)=>{
+    console.log("req.query.searchTerms is", req.query.q)
     axios({
         method: "GET",
-        url: `https://api.giphy.com/v1/gifs/search?q="${req.body}&limit=5&rating=g&api_key=${GIPHY_API_KEY}`,
+        url: `https://api.giphy.com/v1/gifs/search?q="${req.query.q}"&limit=5&rating=g&api_key=${GIPHY_API_KEY}`,
     })
     .then((response) =>{
         const GIFsFromGiphy = response.data.data;
