@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
-import { takeLatest, put } from "redux-saga/effects";
+import { takeLatest, put, take } from "redux-saga/effects";
 import axios from "axios";
 
 //Reducer to hold favorited GIPHYs
@@ -14,6 +14,29 @@ const GIPHYs = (state = [], action) => {
   }
 };
 
+//Reducer to hold categories 
+const categories= (state=[],action)=>{
+  switch (action.type){
+    case "FETCH_CATEGORIES":
+      return action.payload;
+    default:
+      return state;
+      
+}
+
+//get initial category list
+function* fetchCategories(){
+  try{
+    const response = yield axios({
+      method: "GET",
+      url: "/api/categories"
+    }); 
+    yield put({type:"FETCH_CATEGORIES", payload: response.data });
+  }
+  catch (error){
+    console.log("error fetching categories", error)
+  }}
+}
 //this function will be used to get trending GIFS 
 //that load initially before searching (STRETCH GOAL)
 function* getTrendingGIPHYs(){
@@ -71,6 +94,7 @@ function* fetchFavs(){
 function* rootSaga() {
   yield takeLatest("ADD_TO_FAVORITES", addToFavs);
   yield takeLatest("SET_CATEGORY", setCategory);
+  yield takeLatest("GET_CATEGORIES", fetchCategories);
   yield takeLatest("FETCH_GIFS", searchGIFS);
   yield takeLatest("FETCH_FAVS", fetchFavs);
   yield takeLatest("FETCH_TRENDING", getTrendingGIPHYs);
@@ -85,6 +109,7 @@ const giphyStore = createStore(
   // reducer is a function that runs every time an action is dispatched
   combineReducers({
     GIPHYs,
+    categories
   }),
   applyMiddleware(sagaMiddleware, logger)
 );
