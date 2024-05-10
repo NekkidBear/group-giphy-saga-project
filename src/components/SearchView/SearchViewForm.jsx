@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import SearchViewResults from "./SearchViewResults";
 
 export default function SearchViewForm() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export default function SearchViewForm() {
         <input id="searchInput" onChange={inputHandler} type="text" placeholder="Search for " />
         <button type="submit">Show me the GIFS!</button>
       </form>
+      <SearchViewResults />
     </div>
   );
 }
