@@ -54,6 +54,7 @@ function* getTrendingGIPHYs(){
 }
 
 function* addToFavs(action) {
+  console.log(action.payload)
 try{
   let response = yield axios({
     method: "POST",

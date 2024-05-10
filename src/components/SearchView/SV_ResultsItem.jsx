@@ -5,7 +5,7 @@ export default function SV_ResultsItem(gif) {
   const categories = useSelector(store=>store.categories) // will be populated by server query from categories table
   // console.log('GIF is ', gif);
   let favStatus = false;
-  let favoriteItem = {img_URL: "", category_id: ""}
+  let favoriteItem = {img_url: "", category_id: ""}
   let categorySelected = "";
   const dispatch = useDispatch();
 
@@ -19,14 +19,14 @@ useEffect(()=>{
   getCategories();
 }, []);
 
-  let img_URL = gif.images.fixed_width.url;
+  let img_url = gif.images.fixed_width.url;
   
   const markFav = (e) => {
     favStatus = !favStatus
     console.log("marking favorite");
     if (favStatus === true) {
       console.log('Added to Favorites')
-      favoriteItem.img_URL = img_URL;
+      favoriteItem.img_url = img_url;
       console.log(favoriteItem)
     }
   };
@@ -41,7 +41,7 @@ useEffect(()=>{
     console.log(favoriteItem);
     dispatch({
       type: 'ADD_TO_FAVORITES',
-      payload: favoriteItem
+      payload: {...favoriteItem}
     })
   }
   return (

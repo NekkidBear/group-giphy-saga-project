@@ -21,6 +21,7 @@ router.get("/", (req, res) => {
 
 // add a new favorite
 router.post("/", (req, res) => {
+  console.log("req.body is", req.body)
   const sqlText = `
   INSERT INTO "favorites"
     ("category_id", "img_url")
