@@ -19,7 +19,7 @@ useEffect(()=>{
   getCategories();
 }, []);
 
-  let img_url = gif && gif?.images.fixed_width.url;
+  let img_url = gif?.images.fixed_width.url;
 
   console.log(img_url)
   const markFav = (e) => {
