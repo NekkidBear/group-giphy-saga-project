@@ -23,12 +23,10 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const sqlText = `
   INSERT INTO "favorites"
-    ("category_id", "img_url
-    ")
-    VALUES(
-      $1, $2
-    )`;
-  const sqlValues = (req.body.category_id, req.body.img_url);
+    ("category_id", "img_url")
+    VALUES
+    ($1, $2)`;
+  const sqlValues = [req.body.category_id, req.body.img_url];
   pool
     .query(sqlText, sqlValues)
     .then((result) => {
