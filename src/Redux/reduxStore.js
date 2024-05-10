@@ -31,6 +31,7 @@ function* fetchCategories(){
       method: "GET",
       url: "/api/categories"
     }); 
+    // console.log.apply('response.data is', response.data)
     yield put({type:"FETCH_CATEGORIES", payload: response.data });
   }
   catch (error){
@@ -52,9 +53,23 @@ function* getTrendingGIPHYs(){
   }
 }
 
-function* addToFavs() {
-  //todo
+function* addToFavs(action) {
+try{
+  let response = yield axios({
+    method: "POST",
+    url: '/api/favorites',
+    data: action.payload
+  })
+  yield put({
+    type: "FETCH_FAVS"
+  })
+  console.log("added favorite")
+} catch(error){
+  console.log('error adding favorite', error)
 }
+
+}
+
 function* setCategory() {
   //todo
 }

@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default function SV_ResultsItem(gif) {
   const categories = useSelector(store=>store.categories) // will be populated by server query from categories table
@@ -6,8 +7,20 @@ export default function SV_ResultsItem(gif) {
   let favStatus = false;
   let favoriteItem = {img_URL: "", category_id: ""}
   let categorySelected = "";
+  const dispatch = useDispatch();
+
+  const getCategories=()=>{
+    dispatch ({
+      type: "GET_CATEGORIES"
+    })
+  };
+
+useEffect(()=>{
+  getCategories();
+}, []);
 
   let img_URL = gif.images.fixed_width.url;
+  
   const markFav = (e) => {
     favStatus = !favStatus
     console.log("marking favorite");
@@ -19,15 +32,20 @@ export default function SV_ResultsItem(gif) {
   };
 
   const setCategory = (e) => {
-    categorySelected = e.target.category_id
+    categorySelected = e.target.value
     favoriteItem.category_id = categorySelected
+    console.log("chosen category is", categorySelected)
   };
 
-  const createFavorite = () =>{
-    //todo
+  const publishFavoriteToServer = () =>{
+    console.log(favoriteItem);
+    dispatch({
+      type: 'ADD_TO_FAVORITES',
+      payload: favoriteItem
+    })
   }
-  console.log("categories is", categories);
   return (
+    
     <div className="searchResultItem">
       <div>
         <img
@@ -36,17 +54,16 @@ export default function SV_ResultsItem(gif) {
           alt={gif?.alt_text || "GIF image based on search terms"}
         />
         <button onClick={markFav}>Favorite this!</button>
-        <select>
+        <select onChange={(e) => setCategory(e)}>
           {categories.map((category) => {
-            console.log(category)
             return (
-              <option onClick={(e) => setCategory} value={category.id}>
+              <option key={category.id}  value={category.id}>
                 {category.name}
               </option>
             );
           })}
         </select>
-        <button onClick={createFavorite}>Update favorites status</button>
+        <button onClick={publishFavoriteToServer}>Submit Favorite</button>
       </div>
     </div>
   );
