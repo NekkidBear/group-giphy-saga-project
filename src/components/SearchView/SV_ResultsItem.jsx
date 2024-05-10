@@ -19,8 +19,9 @@ useEffect(()=>{
   getCategories();
 }, []);
 
-  let img_url = gif.images.fixed_width.url;
-  
+  let img_url = gif.images.original.url;
+
+  console.log(img_url)
   const markFav = (e) => {
     favStatus = !favStatus
     console.log("marking favorite");
