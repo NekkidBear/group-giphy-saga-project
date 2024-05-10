@@ -14,15 +14,18 @@ const GIPHYs = (state = [], action) => {
   }
 };
 
-function* getTrendingGIPHYs() {
-  axios({
-    method: "GET",
-    url: "/api/giphy/trending",
-  })
-    .then(dispatch({ type: "SET_GIPHYs" }))
-    .catch((error) => {
-      console.log("error", error);
+//this function will be used to get trending GIFS 
+//that load initially before searching (STRETCH GOAL)
+function* getTrendingGIPHYs(){
+  try {
+    const response = yield axios({
+      method: "GET",
+      url: "/api/giphy/trending",
     });
+    yield put({ type: "SET_GIPHYs", payload: response.data });
+  } catch (error) {
+    console.log("error", error);
+  }
 }
 
 function* addToFavs() {
@@ -31,6 +34,9 @@ function* addToFavs() {
 function* setCategory() {
   //todo
 }
+
+//this sends search terms to the API and then stores the result in the Redux State
+
 function* searchGIFS(action) {
   try {
     const response = yield axios({
