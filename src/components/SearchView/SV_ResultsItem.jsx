@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 export default function SV_ResultsItem(gif) {
   const categories = []; // will be populated by server query from categories table
-  // console.log('GIF is ', gif);
+  console.log('GIF is ', gif);
   let favStatus = false;
   let favoriteItem = {img_URL: "", category_id: ""}
   let category = "";

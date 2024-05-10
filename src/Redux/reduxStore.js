@@ -22,7 +22,7 @@ const categories= (state=[],action)=>{
     default:
       return state;
       
-}
+}}
 
 //get initial category list
 function* fetchCategories(){
@@ -36,7 +36,7 @@ function* fetchCategories(){
   catch (error){
     console.log("error fetching categories", error)
   }}
-}
+
 
 //this function will be used to get trending GIFS 
 //that load initially before searching (STRETCH GOAL)
