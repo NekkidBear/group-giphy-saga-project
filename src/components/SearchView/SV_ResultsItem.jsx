@@ -19,7 +19,7 @@ useEffect(()=>{
   getCategories();
 }, []);
 
-  let img_url = gif?.images.fixed_width.url;
+  let img_url = gif?.images?.fixed_width?.url;
 
   console.log(img_url)
   const markFav = (e) => {
@@ -44,17 +44,26 @@ useEffect(()=>{
     dispatch({
       type: 'ADD_TO_FAVORITES',
       payload: {...favoriteItem}
-    })
+    }).then(
+      dispatch({
+        type: 'FETCH_GIFS'
+      })
+    )
   }
+  if(!gif){
+    return <div></div>
+  }
+
   return (
     
     <div className="searchResultItem">
       <div>
+      {img_url ? (
         <img
           key={gif.id}
-          src={gif.images?.fixed_width?.url}
+          src={img_url}
           alt={gif?.alt_text || "GIF image based on search terms"}
-        />
+        />):(<div>Loading GIF...</div>)}
         <button onClick={markFav}>Favorite this!</button>
         <select onChange={(e) => setCategory(e)}>
           {categories.map((category) => {
