@@ -21,13 +21,13 @@ router.get("/", (req, res) => {
 
 // add a new favorite
 router.post("/", (req, res) => {
+  console.log("req.body is", req.body)
   const sqlText = `
   INSERT INTO "favorites"
-    ("category_id", "image_url")
-    VALUES(
-      $1, $2
-    )`;
-  const sqlValues = (req.body.category_id, req.body.image_url);
+    ("category_id", "img_url")
+    VALUES
+    ($1, $2)`;
+  const sqlValues = [req.body.category_id, req.body.img_url];
   pool
     .query(sqlText, sqlValues)
     .then((result) => {
