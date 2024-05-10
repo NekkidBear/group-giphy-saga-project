@@ -1,7 +1,7 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 export default function SV_ResultsItem(gif) {
-  const categories = []; // will be populated by server query from categories table
-  console.log('GIF is ', gif);
+  const categories = useSelector(store=>store.categories) // will be populated by server query from categories table
+  // console.log('GIF is ', gif);
   let favStatus = false;
   let favoriteItem = {img_URL: "", category_id: ""}
   let category = "";
@@ -25,7 +25,7 @@ export default function SV_ResultsItem(gif) {
   const createFavorite = () =>{
     //todo
   }
-
+  console.log("categories is", categories);
   return (
     <div className="searchResultItem">
       <div>
@@ -37,6 +37,7 @@ export default function SV_ResultsItem(gif) {
         <button onClick={markFav}>Favorite this!</button>
         <select>
           {categories.map((category) => {
+            console.log(category)
             return (
               <option onClick={(e) => setCategory} value={category.id}>
                 {category.name}
