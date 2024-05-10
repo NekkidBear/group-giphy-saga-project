@@ -9,8 +9,8 @@ export default function SearchViewResults() {
       <h2>Search Results</h2>
       {GIPHYs.map((gif)=>{
         return (
-            <div>
-                <SV_ResultsItem gif={gif} />
+            <div key={gif.id}>
+                <SV_ResultsItem {...gif} />
             </div>
         )
       })}
