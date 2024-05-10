@@ -36,6 +36,7 @@ useEffect(()=>{
     categorySelected = e.target.value
     favoriteItem.category_id = categorySelected
     console.log("chosen category is", categorySelected)
+    console.log (favoriteItem)
   };
 
   const publishFavoriteToServer = () =>{
